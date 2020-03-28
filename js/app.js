@@ -5,6 +5,7 @@ const asunto = document.getElementById('asunto');
 const mensaje = document.getElementById('mensaje');
 const btnEnviar = document.getElementById('enviar');
 const formularioEnviar = document.getElementById('enviar-mail');
+const resetBtn = document.getElementById('resetBtn');
 
 // ------------------------ EVENT LISTENERS ------------------------
 
@@ -21,6 +22,9 @@ function eventListeners(){
 
     // boton de enviar en el submit
     formularioEnviar.addEventListener('submit', enviarEmail);
+
+    // boton de reseat cambios
+    resetBtn.addEventListener('click', resetFormulario);
 };
 
 // ------------------------ FUNCIONES ------------------------
@@ -60,6 +64,11 @@ function validarCampo(){
     };
      
 };
+
+function resetFormulario(e){
+    formularioEnviar.reset();
+    e.preventDefault();
+}
 
 // valida la longitud del campo
 function validarLongitud(campo){
