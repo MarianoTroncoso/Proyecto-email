@@ -4,6 +4,7 @@ const email = document.getElementById('email');
 const asunto = document.getElementById('asunto');
 const mensaje = document.getElementById('mensaje');
 const btnEnviar = document.getElementById('enviar');
+const formularioEnviar = document.getElementById('enviar-mail');
 
 // ------------------------ EVENT LISTENERS ------------------------
 
@@ -17,6 +18,9 @@ function eventListeners(){
     email.addEventListener('blur', validarCampo);
     asunto.addEventListener('blur', validarCampo);
     mensaje.addEventListener('blur', validarCampo);
+
+    // boton de enviar en el submit
+    formularioEnviar.addEventListener('submit', enviarEmail);
 };
 
 // ------------------------ FUNCIONES ------------------------
@@ -72,7 +76,35 @@ function validarLongitud(campo){
     };
 };
 
+// cuando se envia el correo
+function enviarEmail(e){
+    // spinner al presionar enviar
+    const spinnerGif = document.querySelector('#spinner');
+    spinnerGif.style.display = 'block';
 
+    // gif que envia el email
+    const enviado = document.createElement('img');
+    enviado.src = 'img/mail.gif';
+    enviado.style.display = 'block';
+
+
+    // ocultar spinner y mostrar mail enviado
+    // despues de 2 segundo
+    setTimeout(function(){
+        
+        spinnerGif.style.display='none';
+
+        // padre de spinner es loaders
+        document.querySelector('#loaders').appendChild(enviado);
+
+        setTimeout(function(){
+            enviado.remove();
+            formularioEnviar.reset();
+        }, 3000)
+    }, 2000);
+};
+
+// verifica la longitud del texto en los campos
 function validarEmail(campo){
     const mensaje = campo.value;
     if(mensaje.indexOf('@') !== -1){
@@ -83,6 +115,8 @@ function validarEmail(campo){
         campo.classList.add('error');
     };
 };
+
+
 
 
 
